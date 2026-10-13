@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    background-color: #07070b;
+    color: #f1f5f9;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #08080f;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e1b4b;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8b5cf6;
+  }
+}
+
+/* Hide scrollbar utility for horizontal scroll tracks */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Glassmorphism & custom utility classes */
+.glass-panel {
+  background: rgba(13, 14, 28, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(22, 22, 44, 0.85);
+  border-color: rgba(192, 132, 252, 0.4);
+  box-shadow: 0 12px 35px -10px rgba(139, 92, 246, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Touch devices: disable hover lift to prevent sticky-hover */
+@media (hover: none) {
+  .glass-panel-hover:hover {
+    transform: none;
+  }
+}
+
+.glow-purple {
+  box-shadow: 0 0 50px -10px rgba(168, 85, 247, 0.35);
+}
+
+.glow-pink {
+  box-shadow: 0 0 45px -10px rgba(236, 72, 153, 0.3);
+}
+
+.glow-orb {
+  box-shadow: 0 0 70px 20px rgba(192, 132, 252, 0.35);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #e9d5ff 45%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-accent {
+  background: linear-gradient(135deg, #e9d5ff 0%, #c084fc 50%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 3D Ghosted outlined text for UI/UX layered typography (inspired by reference "DEVELOPER") */
+.text-stroke-purple {
+  -webkit-text-stroke: 1.5px rgba(192, 132, 252, 0.45);
+  color: transparent;
+  text-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
+}
+
+.text-stroke-pink {
+  -webkit-text-stroke: 1.5px rgba(244, 114, 182, 0.45);
+  color: transparent;
+  text-shadow: 0 0 25px rgba(236, 72, 153, 0.3);
+}
+
+/* Mobile-specific stroke reduction */
+@media (max-width: 640px) {
+  .text-stroke-purple {
+    -webkit-text-stroke: 1px rgba(192, 132, 252, 0.35);
+  }
+  .text-stroke-pink {
+    -webkit-text-stroke: 1px rgba(244, 114, 182, 0.35);
+  }
+}
+
+/* Ambient subtle background grid */
+.bg-grid-pattern {
+  background-size: 48px 48px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* Ambient radial glow */
+.hero-glow-layer {
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.18) 0%, rgba(236, 72, 153, 0.08) 40%, transparent 75%);
+}
+
+/* Contact form input autofill styling for dark mode */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5) inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  caret-color: #a78bfa;
+}
+
+/* Fade-in animation for mobile menu and modals */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out;
+}
+
+/* Slide-up animation for mobile bottom sheets */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Form focus ring — visible focus for accessibility */
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 2px;
+}
+
+/* Contact form sending spinner */
+@keyframes spin-fast {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-fast {
+  animation: spin-fast 0.6s linear infinite;
+}
+
+/* Disable animations if user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
